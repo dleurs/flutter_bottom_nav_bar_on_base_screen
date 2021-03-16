@@ -21,12 +21,21 @@ class MyApp extends StatelessWidget {
   Route<dynamic> _generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case AppRoutes.computer:
-        return MaterialPageRoute(builder: (context) => ComputerScreen());
+        return _createRoute(ComputerScreen());
       case AppRoutes.phone:
-        return MaterialPageRoute(builder: (context) => PhoneScreen());
+        return _createRoute(PhoneScreen());
       case AppRoutes.person:
       default:
-        return MaterialPageRoute(builder: (context) => PersonScreen());
+        return _createRoute(PersonScreen());
     }
   }
+}
+
+Route _createRoute(Widget screen) {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => screen,
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      return child;
+    },
+  );
 }
